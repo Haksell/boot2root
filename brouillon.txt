@@ -9,6 +9,12 @@ https://www.cvedetails.com/vulnerability-list/vendor_id-10908/product_id-19531/M
 https://www.exploit-db.com/exploits/40676
 https://stackoverflowteams.com/c/42network/questions/664
 https://www.cvedetails.com/version/1251384/Mylittleforum-My-Little-Forum-2.3.4.html
+https://www.cvedetails.com/version/583080/Squirrelmail-Squirrelmail-1.4.22.html
+
+VERSIONS
+
+mylittleforum 2.3.4
+SquirrelMail 1.4.22
 
 TODO
 
@@ -16,15 +22,51 @@ Note how to find mylittleforum version
 Create boot2root account on forum
 Create boot2root account on webmail
 Change admin password on forum
+Delete .htaccess?
+Use Very interesting !!!! mail
+
+PASSWORDS
+
+forum | lmezard | !q\]Ej?*5K5cy*AJ
+forum | everyone after hack | !q\]Ej?*5K5cy*AJ
+
+admin@borntosec.net
+webmail | laurie@borntosec.net | !q\]Ej?*5K5cy*AJ
+qudevide@borntosec.net
+thor@borntosec.net
+wandre@borntosec.net
+zaz@borntosec.net
+
+phpmyadmin | root | Fg-'kKXBj87E:aJ$
+phpmyadmin | debian-sys-maint after hack | Fg-'kKXBj87E:aJ$
+phpmyadmin | phpmyadmin after hack | Fg-'kKXBj87E:aJ$
 
 STEPS
 
 Setup port forwarding for common ports (20 -> 13020, 21 -> 13021, 22 -> 13022, 443 -> 13443)
+
 go install github.com/OJ/gobuster/v3@latest
 gcl git@github.com:danielmiessler/SecLists.git ~/sgoinfre/seclists
 gcl git@github.com:My-Little-Forum/mylittleforum.git ~/sgoinfre/mylittleforum
+
 ~/go/bin/gobuster dir -u https://localhost:13443 -w ~/sgoinfre/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -k -x php,html,js
 Found: /forum /webmail /phpmyadmin
+
+~/go/bin/gobuster dir -u https://localhost:13443/forum -w ~/sgoinfre/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -k -x php,html,js
+Found: /images /.html /themes /modules /index /index.php /includes /update /js /lang /config /backup
+
+~/go/bin/gobuster dir -u https://localhost:13443/webmail -w ~/sgoinfre/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -k -x php,html,js
+Found: /.html /index.php /images /help /themes /plugins /src /include /config /class /functions /po /locale
+
+view-source:https://localhost:13443/forum/ shows my little forum 2.3.4
+
 Read https://localhost:13443/forum/index.php?id=6
 Someone tried to connect with username !q\]Ej?*5K5cy*AJ, lmezard logged in right after
 This is her password for both the forum and webmail
+
+We connect to webmail and find a mail with subject "DB Access" with the root credentials
+We connect to phpmyadmin.
+We change all passwords for forum to be the same as lmezard
+We change all passwords for phpmyadmin to be the same as root
+
+Visit https://localhost:13443/forum/index.php?mode=admin&action=backup as admin and create complete backup
