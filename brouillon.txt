@@ -1,0 +1,30 @@
+IDEAS
+
+https://localhost:13443/forum/index.php?id=6 has been edited, find first version?
+find vulnerabilities for mylittleforum 2.3.4
+
+LINKS
+
+https://www.cvedetails.com/vulnerability-list/vendor_id-10908/product_id-19531/Mylittleforum-My-Little-Forum.html#:~:text=CVE%2D2015%2D1475,php%20or%20(b)%20forum_entry.
+https://www.exploit-db.com/exploits/40676
+https://stackoverflowteams.com/c/42network/questions/664
+https://www.cvedetails.com/version/1251384/Mylittleforum-My-Little-Forum-2.3.4.html
+
+TODO
+
+Note how to find mylittleforum version
+Create boot2root account on forum
+Create boot2root account on webmail
+Change admin password on forum
+
+STEPS
+
+Setup port forwarding for common ports (20 -> 13020, 21 -> 13021, 22 -> 13022, 443 -> 13443)
+go install github.com/OJ/gobuster/v3@latest
+gcl git@github.com:danielmiessler/SecLists.git ~/sgoinfre/seclists
+gcl git@github.com:My-Little-Forum/mylittleforum.git ~/sgoinfre/mylittleforum
+~/go/bin/gobuster dir -u https://localhost:13443 -w ~/sgoinfre/seclists/Discovery/Web-Content/directory-list-2.3-small.txt -k -x php,html,js
+Found: /forum /webmail /phpmyadmin
+Read https://localhost:13443/forum/index.php?id=6
+Someone tried to connect with username !q\]Ej?*5K5cy*AJ, lmezard logged in right after
+This is her password for both the forum and webmail
