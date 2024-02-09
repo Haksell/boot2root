@@ -13,8 +13,13 @@ https://www.cvedetails.com/version/583080/Squirrelmail-Squirrelmail-1.4.22.html
 
 VERSIONS
 
-mylittleforum 2.3.4
+MyLittleForum 2.3.4
 SquirrelMail 1.4.22
+phpMyAdmin 3.4.10.1deb1
+MySQL client version: 5.5.44
+Apache/2.2.22 (Ubuntu)
+PHP extension: mysqli
+Server version: 5.5.44-0ubuntu0.12.04.1 (according to phpMyAdmin)
 
 TODO
 
@@ -24,6 +29,15 @@ Create boot2root account on webmail
 Change admin password on forum
 Delete .htaccess?
 Use Very interesting !!!! mail
+https://localhost:13443/forum/index.php?mode=js_defaults&t=1707434027&user_type=2 (delete_backup_confirm)
+
+wtf is that?
+https://localhost:13443/forum/modules/bad-behavior/index.html
+https://localhost:13443/forum/modules/bad-behavior/bad-behavior/banned.inc.php
+
+https://localhost:13443/forum/index.php?mode=admin&action=edit_page PHP backdoor here?
+Add backdoor to cron
+Try uploading php files instead of profile pictures for backdoor
 
 PASSWORDS
 
@@ -38,7 +52,7 @@ wandre@borntosec.net
 zaz@borntosec.net
 
 phpmyadmin | root | Fg-'kKXBj87E:aJ$
-phpmyadmin | debian-sys-maint after hack | Fg-'kKXBj87E:aJ$
+phpmyadmin | debian-sys-maint after hack | Fg-'kKXBj87E:aJ$ (doesn't work somehow)
 phpmyadmin | phpmyadmin after hack | Fg-'kKXBj87E:aJ$
 
 STEPS
@@ -70,3 +84,5 @@ We change all passwords for forum to be the same as lmezard
 We change all passwords for phpmyadmin to be the same as root
 
 Visit https://localhost:13443/forum/index.php?mode=admin&action=backup as admin and create complete backup
+
+SELECT '<?php phpinfo(); ?>' INTO OUTFILE '/tmp/mycustomphpinfo.php'
