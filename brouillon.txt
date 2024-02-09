@@ -48,6 +48,8 @@ https://localhost:13443/backdoor.php?cmd=whoami
 Maybe here? https://localhost:13443/forum/images/uploaded/ (doesn't seem to work either)
 Add a user to /etc/passwd using SQL
 
+Find where SquirrelMail stores its data
+
 PASSWORDS
 
 forum | lmezard | !q\]Ej?*5K5cy*AJ
